@@ -2,6 +2,9 @@ package cholog;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 public class Author {
     @Id
@@ -11,8 +14,10 @@ public class Author {
     @OneToOne
     private Person person;
 
-    public Author(Person person) {
-    }
+    @OneToMany(mappedBy = "author")
+    private Set<BookAuthor> books = new HashSet<>();
+
+    public Author(Person person) {this.person = person;}
 
     public Author() {
     }
